@@ -19,7 +19,7 @@ services:
       - default
 
   eewrendererstg:
-    image: ghcr.io/eewbot/eew-renderer:master@sha256:3652f04b559f80e7e4b17f03ea1038f7ffef5083ad2d121c6762010bf1da0c99
+    image: ghcr.io/eewbot/eew-renderer:master@sha256:97a34fee2b3ab24334b63dc9b7608ce63a6a9e6bf9e484a78c5ad67de975a47a
     hostname: eewrenderer
     container_name: eewrendererstg${VARIANT:-}__eewrendererstg
     restart: unless-stopped
