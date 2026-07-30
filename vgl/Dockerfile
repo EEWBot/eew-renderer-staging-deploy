@@ -4,4 +4,4 @@ ARG VIRTUALGL_VERSION
 ADD https://github.com/VirtualGL/virtualgl/releases/download/${VIRTUALGL_VERSION}/virtualgl_${VIRTUALGL_VERSION}_amd64.deb \
     virtualgl_${VIRTUALGL_VERSION}_amd64.deb
 
-RUN apt-get update && apt-get install -y /virtualgl_${VIRTUALGL_VERSION}_amd64.deb && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y /virtualgl_${VIRTUALGL_VERSION}_amd64.deb libegl1 && rm -rf /var/lib/apt/lists/*
