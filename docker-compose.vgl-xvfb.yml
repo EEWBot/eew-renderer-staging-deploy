@@ -1,0 +1,76 @@
+services:
+  xvfb:
+    build: ./xvfb
+    hostname: xvfb
+    container_name: eewrendererstg${VARIANT:-}__xvfb
+    restart: unless-stopped
+
+    command: Xvfb :0 -listen tcp -ac -screen 0 1024x768x24
+
+    tmpfs:
+      - /tmp
+
+    deploy:
+      resources:
+        limits:
+          memory: 128m
+
+    networks:
+      - default
+
+  eewrendererstg:
+    build:
+      context: ./vgl
+      args:
+        # depName=VirtualGL/virtualgl
+        VIRTUALGL_VERSION: "3.1.4"
+
+    hostname: eewrenderer
+    container_name: eewrendererstg${VARIANT:-}__eewrendererstg
+    restart: unless-stopped
+
+    environment:
+      LISTEN: 0.0.0.0:3000
+      DISPLAY: xvfb:0
+      ALLOW_DEMO: ${ALLOW_DEMO}
+      HMAC_KEY: ${HMAC_KEY}
+      INSTANCE_NAME: ${INSTANCE_NAME}
+      MINIMUM_RESPONSE_INTERVAL: ${MINIMUM_RESPONSE_INTERVAL}
+
+    command: vglrun -d /dev/dri/${CARD:-card0} /usr/bin/eew-renderer
+
+    devices:
+      - /dev/dri:/dev/dri
+
+    deploy:
+      resources:
+        limits:
+          memory: 2g
+
+    networks:
+      - default
+
+  cloudflared:
+    image: cloudflare/cloudflared:2026.7.3
+    hostname: cloudflared
+    container_name: eewrendererstg${VARIANT:-}__cloudflared
+
+    restart: unless-stopped
+
+    environment:
+      TUNNEL_LOGFILE: /dev/stdout
+
+    command: tunnel run --token ${TUNNEL_TOKEN}
+    user: root
+
+    deploy:
+      resources:
+        limits:
+          memory: 128m
+
+    networks:
+      - default
+
+networks:
+  default:
+    name: eewrendererstg${VARIANT:-}__default
