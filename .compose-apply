@@ -1,5 +1,4 @@
-docker-compose.dri.yml
-docker-compose.nvidia.yml
-docker-compose.wslg.yml
+docker-compose.headless-dri.yml
+docker-compose.nvidia-headless-dri.yml
 docker-compose.xvfb.yml
 xvfb/Dockerfile
