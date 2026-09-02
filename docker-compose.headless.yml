@@ -1,6 +1,6 @@
 services:
   eewrendererstg:
-    image: ghcr.io/eewbot/eew-renderer:dev@sha256:b752e3b14a7d193b65f0dbaf9e24bf312fd5143263459d505f4f31dc47183534
+    image: ghcr.io/eewbot/eew-renderer:dev@sha256:efd6e12aa8a0d0cf90252636abe17ed62d5332ef430d965925301d8ef4ca519a
     hostname: eewrenderer
     container_name: eewrendererstg${VARIANT:-}__eewrendererstg
     restart: unless-stopped
