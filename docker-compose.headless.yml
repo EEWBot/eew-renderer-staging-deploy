@@ -7,11 +7,9 @@ services:
 
     environment:
       LISTEN: 0.0.0.0:3000
-      ALLOW_DEMO: ${ALLOW_DEMO:-false}
       HMAC_KEY: ${HMAC_KEY}
       INSTANCE_NAME: ${INSTANCE_NAME}
       MINIMUM_RESPONSE_INTERVAL: ${MINIMUM_RESPONSE_INTERVAL}
-      HEADLESS: true
       IMAGE_CACHE_CAPACITY: ${IMAGE_CACHE_CAPACITY:-512}
 
     command: /usr/bin/eew-renderer
