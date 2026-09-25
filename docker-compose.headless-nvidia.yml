@@ -6,6 +6,7 @@ services:
     restart: unless-stopped
 
     environment:
+      CLIENT_IP_SOURCE: CfConnectingIp
       LISTEN: 0.0.0.0:3000
       HMAC_KEY: ${HMAC_KEY}
       INSTANCE_NAME: ${INSTANCE_NAME}
